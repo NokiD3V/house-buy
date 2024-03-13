@@ -1,0 +1,208 @@
+*{
+    white-space: -moz-pre-wrap !important;  
+    white-space: -webkit-pre-wrap;    
+    white-space: -pre-wrap;            
+    white-space: -o-pre-wrap;            
+    white-space: pre-wrap;                
+    word-wrap: break-word;                  
+    word-break: break-all;
+    white-space: normal;
+}
+.wrapper{
+    min-height: calc(100vh - 270px);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    .content{
+        width: 1170px;
+        display: flex;
+        justify-content: space-between;
+        margin-top: 35px;
+        .profile{
+            width: 370px;
+            .title{
+                font-weight: bold;
+                font-size: 22px;
+            }
+            .avatar{
+                margin-top: 5px;
+                width: 370px;
+                height: 370px;
+                border-radius: 12px;
+            }
+            .user__title{
+                font-size: 18px;
+                margin-top: 5px;
+            }
+            .user__phone{
+                font-size: 14px;
+                margin-top: 12px;
+            }
+            .user__username{
+                font-size: 14px;
+                margin-top: 7px;
+            }
+            span{
+                background-color: #F5F2F0;
+                padding: 3px;
+                border-radius: 4px;
+            }
+            .change{
+                margin-top: 20px;
+                width: 100%;
+                .change__btn{
+                    padding: 9px 90px;
+                    border-radius: 12px;
+                    background-color: #F28F0D;
+                    font-size: 18px;
+                    font-weight: bold;
+                    text-decoration: none;
+                    text-align: center;
+                }
+            }
+            .logout{
+                text-align: center;
+                align-items: center;
+                line-height: 30px;
+                width: 170px;
+                height: 30px;
+                margin-top: 20px;
+                border-radius: 12px;
+                background-color: #F20D0D;
+                font-size: 14px;
+            }
+            .logout:hover{
+                cursor: pointer;
+            }
+            .admin__href{
+                text-decoration: none;
+                .admin__btn{
+                    margin-top: 10px;
+                    text-align: center;
+                    width: 100%;
+                    padding: 10px 0;
+                    margin-top: 10px;
+                    border-radius: 12px;
+                    background-color: #F20D0D;
+                    font-size: 14px;
+                    text-decoration: none;
+                }
+            }
+            
+
+        }
+        .requests{
+            width: 770px;
+            .title{
+                font-size: 20px;
+                margin-bottom: 5px;
+            }
+            .request__item{
+                display: flex;
+                justify-content: space-between;
+                width: 770px;
+                align-items: center;
+                text-decoration: none;
+                margin-bottom: 30px;
+                img{
+                    width: 270px;
+                    height: 160px;
+                    border-radius: 12px;
+                    object-fit:cover;
+                }
+                .info{
+                    width: 470px;
+                    min-height: 160px;
+                    display: flex;
+                    flex-direction: column;
+                    justify-content:unset;
+                    .adress{
+                        display: flex;
+                        font-size: 18px;
+                        font-weight: bold;
+                        align-items: center;
+                        width: 100%;
+                        justify-content: space-between;
+                        .type{
+                            font-size: 14px;
+                            font-weight: 500;
+                            padding: 2px 12px;
+                            border-radius: 12px;
+                        }
+                        .type:has(.progress){
+                            background-color: #F28F0D;
+                        }
+                        .type:has(.success){
+                            background-color: #80F20D;
+                        }
+                        .type:has(.denied){
+                            background-color: #F20D0D;
+                        }
+                    }
+                    .description{
+                        margin-top: 14px;
+                        font-size: 14px;
+                    }
+                    .contacts{
+                        display: flex;
+                        justify-self: flex-end;
+                        margin-top: auto;
+                        justify-content: space-between;
+                        .user{
+                            display: flex;
+                            align-items: center;
+                            img{
+                                width: 48px;
+                                height: 48px;
+                            }
+                            .contact__info{
+                                margin-left: 10px;
+                                display: flex;
+                                flex-direction: column;
+                                justify-content: space-between;
+                                .name{
+                                    font-size: 18px;
+                                }
+                                .phone{
+                                    font-size: 14px;
+                                    color: #8A7861;
+                                }
+                            }
+                        }
+                        .admin{
+                            display: flex;
+                            align-items: center;
+                            width: 270px;
+                            .shield{
+                                width: 48px;
+                                height: 48px;
+                            }
+                            .contact__info{
+                                margin-left: 10px;
+                                display: flex;
+                                flex-direction: column;
+                                justify-content: space-between;
+                                .name{
+                                    font-size: 18px;
+                                }
+                                .phone{
+                                    font-size: 14px;
+                                    color: #8A7861;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            .comment{
+                margin-top: -40px;
+                margin-bottom: 30px;
+                font-size: 14px;
+                span{
+                    font-size: 16px;
+                    padding-right: 5px;
+                }
+            }
+        }
+    }
+}

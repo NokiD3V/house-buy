@@ -1,0 +1,103 @@
+
+.wrapper{
+    width: 100vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: Montserrat;
+    .content{
+        width: 920px;
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        .form{
+            margin-top: 35px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            color: #582C4D;
+            .title{
+                font-size: 40px;
+                text-align: center;
+            }
+            .error{
+                font-size: 14px;
+                color: #F20D0D;
+                margin-top: 5px;
+            }
+            .email{ 
+                display: flex;
+                flex-direction: column;
+                margin-top: 20px;
+                font-size: 18px;
+                input{
+                    margin-top: 5px;
+                    font-family: sans-serif;
+                    border: none;
+                    width: 350px;
+                    height: 25px;
+                    font-size: 14px;
+                    padding-left: 5px;
+                    border-radius: 5px;
+                    background-color: #F5F2F0;
+                }
+            }
+            .password{
+                display: flex;
+                flex-direction: column;
+                margin-top: 15px;
+                font-size: 18px;
+                input{
+                    margin-top: 5px;
+                    font-family: sans-serif;
+                    border: none;
+                    width: 350px;
+                    height: 25px;
+                    font-size: 14px;
+                    padding-left: 5px;
+                    border-radius: 5px;
+                    background-color: #F5F2F0;
+                }
+            }
+            .name__child{
+                display: flex;
+                flex-direction: column;
+                margin-top: 15px;
+                font-size: 18px;
+                input{
+                    margin-top: 5px;
+                    font-family: sans-serif;
+                    border: none; 
+                    width: 350px;
+                    height: 25px;
+                    font-size: 14px;
+                    padding-left: 5px;
+                    border-radius: 5px;
+                    background-color: #F5F2F0;
+                }
+            }
+            .login__btn{
+                margin-top: 40px;
+                font-size: 14px;
+            }
+            .register__btn {
+                text-decoration: none;
+                background-color: #F28F0D;
+                padding: 13px 40px;
+                margin-top: 10px;
+                border-radius: 12px;
+                font-size: 22px;
+                border: none;
+            }
+            .register__btn:hover{
+                cursor: pointer;
+            }
+        }
+
+        .picture{
+            width: 458px;
+            height: 449px;
+        }
+    }
+}

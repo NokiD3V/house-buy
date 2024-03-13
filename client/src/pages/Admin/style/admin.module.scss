@@ -1,0 +1,127 @@
+.wrapper{
+    width: 100%;
+    min-height: calc(100vh - 270px);
+    display: flex;
+    justify-content: center;
+    .content{
+        width: 1170px;
+        .admin__title{
+            font-size: 22px;
+            font-weight: bold;
+            margin-top: 35px;
+        }
+        .articles{
+            width: 100%;
+            .article{
+                margin-top: 15px;
+                margin-bottom: 15px;
+                display: flex;
+                justify-content: space-between;
+                width: 100%;
+                img.banner{
+                    width: 270px;
+                    height: 160px;
+                    border-radius: 12px;
+                }
+                .info{
+                    width: 470px;
+                    height: auto;
+                    display: flex;
+                    flex-direction: column;
+                    text-decoration: none;
+                    .adress{
+                        font-size: 18px;
+                        font-weight: bold;
+                    }
+                    .description{
+                        margin-top: 14px;
+                        font-size: 14px;
+                    }
+                    .users{
+                        display: flex;
+                        justify-self: flex-end;
+                        margin-top: auto;
+                        .offer__user{
+                            display: flex;
+                            align-items: center;
+                            width: 200px;
+                            .username{
+                                font-size: 18px;
+                            }
+                            .phone{
+                                color: #8A7861;
+                                font-size: 14px;
+                            }
+                            img{
+                                margin-right: 10px;
+                            }
+                        }
+                        .request__user{
+                            display: flex;
+                            align-items: center;
+                            .username{
+                                font-size: 18px;
+                            }
+                            .phone{
+                                color: #8A7861;
+                                font-size: 14px;
+                            }
+                            img{
+                                margin-right: 10px;
+                            }
+                        }
+                    }
+                    
+                }
+                .admin__buttons{
+                    width: 370px;
+                    height: auto;
+                    .buttons{
+                        display: flex;
+                        justify-content: space-between;
+                        .accept{
+                            font-size: 20px;
+                            width: 170px;
+                            height: 40px;
+                            display: flex;
+                            justify-content: center;
+                            align-items: center;
+                            background-color: #80F20D;
+                            border-radius: 12px;
+                        }
+                        .accept:hover{
+                            cursor: pointer;
+                        }
+                        .denie{
+                            font-size: 20px;
+                            width: 170px;
+                            height: 40px;
+                            display: flex;
+                            justify-content: center;
+                            align-items: center;
+                            background-color: #F2360D;
+                            border-radius: 12px;
+                        }
+                        .denie:hover{
+                            cursor: pointer;
+                        }
+                    }
+                    .comment__title{
+                        margin-top: 5px;
+                        font-size: 16px;
+                    }
+                    .comment{
+                        width: 100%;
+                        height: 79px;
+                        border: none;
+                        padding: 5px;
+                        font-size: 14px;
+                        border-radius: 12px;
+                        background-color: #F5F2F0;
+                        resize: none;
+                    }
+                }
+            }
+        }
+    }
+}
