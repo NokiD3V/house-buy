@@ -31,7 +31,7 @@
             cursor: pointer;
         }
         .title{
-            font-size: 22px;
+            font-size: 1.1em;
             font-weight: bold;
             text-align: center;
             margin-top: -25px;
@@ -39,7 +39,7 @@
         .warning{
             text-align: center;
             margin-top: 5px;
-            font-size: 18px;
+            font-size: 0.9em;
             margin-bottom: 20px;
         }
         .modal__child{
@@ -55,7 +55,7 @@
         .access{
             text-align: center;
             margin-top: 25px;
-            font-size: 18px;
+            font-size: 0.9em;
         }
         .send{
             padding: 7px 100px;
@@ -78,7 +78,7 @@
             border-radius: 12px;
             background-color: #F5F2F0;
             padding: 2px;
-            font-size: 14px;
+            font-size: 0.7em;
             border: none;
             outline: none;
             width: fit-content;
@@ -97,13 +97,14 @@
     margin-bottom: 15px;
     .content{
         width: 1170px;
-
+        font-size: 20px;
         .main__banner{
             margin-top: 32px;
             width: 1170px;
             height: 320px;
             border-radius: 12px;
             object-fit:cover;
+            height: auto;
         }
         .slice{
             display: flex;
@@ -127,7 +128,7 @@
                         border-radius: 12px;
                         text-decoration: none;
                         font-weight: bold;
-                        font-size: 14px;
+                        font-size: 0.7em;
                     }
                     a.rent{
                         background-color: #F28F0D;
@@ -136,21 +137,24 @@
                 .adress{
                     margin-top: 30px;
                     font-weight: bold;
-                    font-size: 22px;
+                    font-size: 1.1em;              
+                    word-wrap:normal;                  
+                    word-break:keep-all;
+                    white-space: normal;
                 }
                 .short__desc{
                     margin-top: 5px;
-                    font-size: 14px;
+                    font-size: 0.7em;
                     color: #8A7861;
                 }
                 .description__title{
-                    font-size: 20px;
+                    font-size: 1em;
                     font-weight: bold;
                     margin-top: 20px;
                 }
                 .description{
                     // width: 100%;
-                    font-size: 14px;
+                    font-size: 0.7em;
                     margin-top: 5px;
                     line-height: 20px;
                     width: 670px;
@@ -172,7 +176,7 @@
                 }
                 .contact__title{
                     font-weight: bold;
-                    font-size: 20px;
+                    font-size: 1em;
                     margin-top: 20px;
                 }
                 .contact{
@@ -181,7 +185,7 @@
                     margin-top: 5px;
                     .contact__info{
                         margin-left: 10px;
-                        font-size: 14px;
+                        font-size: 0.7em;
                         .contact__phone{
                             color: #8A7861;
                         }
@@ -189,7 +193,7 @@
                 }
                 .price__title{
                     font-weight: bold;
-                    font-size: 20px;
+                    font-size: 1em;
                     margin-top: 20px;
                 }
                 .price{
@@ -198,11 +202,79 @@
                     margin-top: 5px;
                     .info{
                         margin-left: 5px;
+                        font-size: 0.7em;
                     }
                 }
             }
         }
 
 
+    }
+}
+
+
+@media screen and (max-width: 1200px) {
+    .content{
+        font-size: 18px !important;
+        max-width: 80vw;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        img.main__banner{
+            display: block;
+            max-width: 100%;
+            min-width: 300px
+        }
+        .left{
+            max-width: 50%;
+            *{
+                max-width: 90%;
+            }
+        }
+        .right{
+            *{
+                max-width: 90%;
+            }
+            min-width: 50%;
+            align-items: center;
+            display: flex;
+            flex-direction: column;
+            flex-wrap: wrap;
+            text-align: left;
+        }
+        .slice{
+            // flex-direction: column-reverse;
+            // align-items: center;
+            .map img{
+                min-width: 100%;
+            }
+        }
+    }
+    
+}
+
+@media screen and (max-width: 800px) {
+    .content{
+        font-size: 16px !important;
+        padding-top: 30px;
+    }
+    .slice{
+        flex-direction: column-reverse;
+        align-items: center;
+        .left{
+            max-width: 100%;
+            .buttons{
+                min-width: 100%;
+                a{
+                    min-width: 100%;
+                }
+            }
+            .description{
+                min-width: 100%;
+            }
+        }
+        .right{
+            max-width: 100%;
+        }
     }
 }

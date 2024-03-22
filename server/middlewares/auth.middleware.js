@@ -21,6 +21,6 @@ module.exports = async (req, res, next) => {
     req.userData = userData
     next()
   } catch (error) {
-    console.log(error)
+    next(error)
   }
 }

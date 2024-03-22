@@ -16,4 +16,23 @@ export default class AuthService{
     async isAdmin(){
         return $api.post('/users/isadmin')
     }
+
+    async changePass(oldpass, newpass){
+        return $api.post('/users/settings/changepass', {oldpass, newpass})
+    }
+
+    async changeNumber(phoneNumber){
+        return $api.post('/users/settings/changenumber', {phoneNumber})
+    }
+
+    async clearAvatar(){
+        return $api.post('/users/settings/clearavatar')
+    }
+
+    async changeAvatar(image){
+        let formData = new FormData()
+        formData.append("image", image)
+
+        return $api.post('/users/settings/changeavatar', formData)
+    }
 }

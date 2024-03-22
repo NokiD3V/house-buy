@@ -1,0 +1,223 @@
+
+.wrapper{
+    min-height: calc(100vh - 270px);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-size: 20px;
+    *{
+        white-space: -moz-pre-wrap !important;  
+        white-space: -webkit-pre-wrap;    
+        white-space: -pre-wrap;            
+        white-space: -o-pre-wrap;            
+        white-space: pre-wrap;                
+        word-wrap: break-word;                  
+        word-break: break-all;
+        white-space: normal;
+    }
+    .content{
+        width: 1170px;
+        margin-top: 35px;
+        .content__title{
+            font-size: 1.1em;
+            font-weight: bold;
+        }
+        form{
+            .submit{
+                width: 370px;
+                height: 50px;
+                border: none;
+                border-radius: 12px;
+                background-color: #F28F0D;
+                margin-left: auto;
+                margin-right: auto;
+                margin-top: 50px;
+                display: block;
+                font-weight: bold;
+                font-size: 1em;
+            }
+            .error{
+                font-size: 0.7em;
+                color: #F20D0D;
+            }
+        }
+        .data{
+            margin-top: 20px;
+            display: flex;
+            .info{
+                width: 370px;
+                .email{
+                    font-size: 1em;
+                    font-weight: bold;
+                    span{
+                        font-weight: normal;
+                    }
+                }
+                .changepass__title{
+                    font-size: 1em;
+                    font-weight: bold;
+                    margin-top: 5px;
+                }
+                .changepass{
+                    margin-top: 5px;
+                    .changepass__old{
+                        margin-top: 5px;
+                        .pass__title{
+                            font-size: 0.9em;
+                            font-weight: bold;
+                        }
+                        input{
+                            width: 100%;
+                            height: 50px;
+                            border-radius: 12px;
+                            background-color: #F5F2F0;
+                            color: #8A7861;
+                            font-size: 0.8em;
+                            padding-left: 5px;
+                            border: none;
+                            outline: none!important;
+                            margin-top: 5px;
+                        }
+                    }
+                    .changepass__new{
+                        margin-top: 5px;
+                        .pass__title{
+                            font-size: 0.9em;
+                            font-weight: bold;
+                        }
+                        input{
+                            width: 100%;
+                            height: 50px;
+                            border-radius: 12px;
+                            background-color: #F5F2F0;
+                            color: #8A7861;
+                            font-size: 0.8em;
+                            padding-left: 5px;
+                            border: none;
+                            outline: none!important;
+                            margin-top: 5px;
+                        }
+                    }
+                }
+
+                .phone{
+                    margin-top: 20px;
+                    .phone__title{
+                        font-size: 0.9em;
+                        font-weight: bold;
+                    }
+                    .phone__select{
+                        display: flex;
+                        justify-content: space-between;
+                        margin-top: 5px;
+                        width: 170px;
+                        input{
+                            width: 170px;
+                        }
+                        input{
+                            height: 56px;
+                            border-radius: 12px;
+                            background-color: #F5F2F0;
+                            color: #8A7861;
+                            font-size: 0.8em;
+                            padding-left: 5px;
+                            border: none;
+                            outline: none!important;
+                        }
+                    }
+                }
+            }
+            .avatar{
+                width: 370px;
+                margin-left: 30px;
+                img{
+                    margin: 0;
+                    border-radius: 12px;
+                    width: 370px;
+                    height: 370px;
+                    object-fit: cover;
+                }
+                .buttons{
+                    margin-top: 15px;
+                    display: flex;
+                    justify-content: space-between;
+                    input{
+                        opacity: 0;
+                        position: absolute;
+                        z-index: -1;
+                        overflow: hidden;
+                        width: 0.4px;
+                        height: 0.4px;
+                    }
+                    label{
+                        font-size: 0.8em;
+                        background-color: #F28F0D;
+                        width: 170px;
+                        height: 50px;
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+                        border-radius: 12px;
+                    }
+                    button{
+                        width: 170px;
+                        height: 50px;
+                        background-color: #F5F2F0;
+                        border-radius: 12px;
+                        border: none;
+                        font-size: 0.7em;
+                    }
+                }
+            }
+        }
+    }
+}
+
+@media screen and (max-width: 1200px) {
+    .content__title{
+        text-align: center;
+    }
+    .data{
+        justify-content: center;
+    }
+}
+
+@media screen and (max-width: 800px) {
+    .wrapper{
+        font-size: 16px;
+    }
+    .content{
+        max-width: 70vw;
+    }
+    .data{
+        
+        flex-direction: column-reverse;
+        align-items: center;
+        .avatar{
+            margin: 0 !important;
+            width: 270px !important;
+            img.avatar{
+                width: 270px !important;
+                height: auto !important;
+            }
+            .buttons{
+                margin-bottom: 20px;
+                label{
+                    width: 120px !important;
+                }
+                button{
+                    width: 120px !important;
+                }
+            }
+        }
+        .info{
+            width: 270px !important;
+        }
+    }    
+    form{
+        .submit{
+            width: 270px !important;
+            margin-bottom: 30px;
+        }
+    }
+}

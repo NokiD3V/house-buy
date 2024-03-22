@@ -8,7 +8,6 @@ const ApiError = require('../exceptions/api-error');
 module.exports.self = async (req, res, next) => {
   try {
     const allOffers = await requestsService.getAllSelf(req.userData.id);
-    console.log("ALL", allOffers)
     return res.json(allOffers)
   } catch (error) {
     next(error)
@@ -35,7 +34,6 @@ module.exports.create = async (req, res, next) => {
 
     const requestCandidate = await requestsService.find(offerID, req.userData.id)
     if(requestCandidate?.length > 0){
-      console.log("CANDIDATE", requestCandidate)
       throw ApiError.BadRequest("Вы уже создали заявку на это объявление.", ["Вы уже создали заявку на это объявление."])
     }
 
@@ -57,10 +55,9 @@ module.exports.close = async (req, res, next) => {
       return next(ApiError.BadRequest('Ошибка при валидации данных', errors.array()))
     }
     const {requestID, closedType, closedComment} = req.body;
-    requestsService.close(requestID, req.userData.id, closedType, closedComment)
-    console.log(req.body)
+    const {success} = await requestsService.close(requestID, req.userData.id, closedType, closedComment)
 
-    res.send({success: "ну наверн тру?"})
+    res.send({success})
   } catch (e) {
     next(e)
     logger.debug(typeof e)

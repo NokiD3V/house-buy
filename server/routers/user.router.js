@@ -28,6 +28,40 @@ module.exports = app => {
 
   router.post('/isadmin', authMiddleware, adminMiddleware, usersController.isAdmin)
 
+  router.post(
+    '/settings/changepass',
+    body('newpass').isLength({ min: 6, max: 32 }),
+    body('oldpass').isLength({ min: 6, max: 32 }),
+    authMiddleware,
+
+    usersController.changepass
+  )
+
+  router.post(
+    '/settings/changenumber',
+    body('phoneNumber').isLength({ min: 8, max: 12 }),
+    authMiddleware,
+
+    usersController.changenumber
+  )
+
+  router.post(
+    '/settings/clearavatar',
+    authMiddleware,
+
+    usersController.clearAvatar
+  )
+
+  router.post(
+    '/settings/changeavatar',
+    authMiddleware,
+
+    usersController.changeAvatar
+  )
+
+
+
+
   
   router.use((err, req, res, next) => {
     console.log(err)

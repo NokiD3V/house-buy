@@ -15,24 +15,12 @@ const LoginPage = () => {
     const navigate = useNavigate()
 
     useEffect(() => {
-        if(localStorage.getItem('token')){
-            store.checkAuth()
-        }
-    }, [])
-
-
-
-    useEffect(() => {
         if(store.isAuth && !store.isLoading){
-            console.log(store.isAuth)
-            navigate("/profile", {replace: true})
-            return
+            return navigate("/profile", {replace: true})
         }
     }, [store.isAuth])
+
     
-    if(store.isLoading){
-        return <Loader/>
-    }
 
     return (
         <div> 

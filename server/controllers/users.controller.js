@@ -4,6 +4,8 @@ const { validationResult } = require('express-validator')
 const ApiError = require('../exceptions/api-error')
 const UserService = require('../service/user.service')
 const offersService = require('../service/offers.service')
+const uuid = require('uuid')
+const path = require('path')
 
 module.exports.register = async (req, res, next) => {
   try {
@@ -13,8 +15,6 @@ module.exports.register = async (req, res, next) => {
     }
     const { email, password, username, phoneNumber } = req.body
     const userData = await UserService.register(email, password, username, phoneNumber)
-
-    console.log(userData)
 
     // Сохранение в куки пользователя токен для авторизации
     res.cookie('token', userData.token, { maxAge: 7 * 24 * 60 * 60 * 1000, httpOnly: true })
@@ -64,6 +64,59 @@ exports.isAdmin = async (req, res, next) => {
     const admin = await UserService.isAdmin(req.userData.email)
 
     res.status(200).send({admin: admin})
+  } catch (error) {
+    next(error)
+  }
+}
+
+exports.changepass = async (req, res, next) => {
+  try {
+    const { oldpass, newpass } = req.body
+    const {success} = await UserService.changepass(req.userData.id, oldpass, newpass)
+
+    res.status(200).send({success})
+  } catch (error) {
+    next(error)
+  }
+}
+
+exports.changenumber = async (req, res, next) => {
+  try {
+    const { phoneNumber } = req.body
+    const {success} = await UserService.changenumber(req.userData.id, phoneNumber)
+
+    res.status(200).send({success})
+  } catch (error) {
+    next(error)
+  }
+}
+
+exports.clearAvatar = async (req, res, next) => {
+  try {
+    const {success} = await UserService.clearAvatar(req.userData.id)
+
+    res.status(200).send({success})
+  } catch (error) {
+    next(error)
+  }
+}
+
+exports.changeAvatar = async (req, res, next) => {
+  try {
+    if(!req.files) throw ApiError.BadRequest("Серверная ошибка. Попробуйте заново", ["Серверная ошибка. Попробуйте заново"])
+    let image = req.files.image;
+    const allowedExtension = ['.png','.jpg','.jpeg'];
+    if(!allowedExtension.includes(path.extname(image.name))){
+      throw ApiError.BadRequest("Неверный тип изображения", ["Неверный тип изображения"])
+    }
+    const image__name = uuid.v4();
+    image.mv('public/avatars/' + image__name + path.extname(image.name));
+
+    const img_adress = "http://" + process.env.IP + ":" + process.env.port + '/static/avatars/' + image__name + path.extname(image.name);
+    
+    const {success} = await UserService.changeAvatar(req.userData.id, img_adress)
+
+    res.status(200).send({success})
   } catch (error) {
     next(error)
   }

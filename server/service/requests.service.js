@@ -38,7 +38,7 @@ class RequestsService {
 
       return requests
     } catch (error) {
-      console.log(error)
+      throw error;
     }
   }
 
@@ -76,8 +76,6 @@ class RequestsService {
         requests[i] = item;
       }
 
-      console.log(requests)
-
       return requests
 
     } catch (error) {
@@ -98,8 +96,8 @@ class RequestsService {
       phoneNumber,
       rentTime: rentdays
     })
-    console.log(response)
 
+  
     if(response.dataValues) return {success: true}
     else return {success: false}
   }
@@ -112,9 +110,8 @@ class RequestsService {
 
       Requests.update({ closed: true, closedType, closedBy, closedComment }, {where: {id: requestID}})
 
-      return 
+      return {success: true}
     } catch (error) {
-      console.log(error)
       throw error;
     }
   }

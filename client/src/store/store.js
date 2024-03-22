@@ -4,6 +4,7 @@ import { API_URL } from "../http";
 import AuthService from "../services/auth.service";
 import RequestService from "../services/request.service";
 import OffersService from "../services/offers.service";
+import RatingService from "../services/rating.service";
 
 export default class Store{
 
@@ -14,6 +15,8 @@ export default class Store{
     isAuth = false;
     isLoading = false;
     localErros = [];
+
+    headerAuth = true;
 
     constructor(){
         // Автоматическое обновление стора при изменении какой-либо части
@@ -37,14 +40,9 @@ export default class Store{
         try{
             const response = await new AuthService().login(email, password);
             localStorage.setItem('token', response.data.accessToken);
-            console.log(response)
             this.setAuth(true)
             this.setUser(response.data.user)
         } catch(e){
-            console.log(e)
-            console.log(e.toJSON())
-            console.log(e.message)
-
             this.setErrors([e.response?.data?.message])
         } finally{
             this.setLoading(false)
@@ -58,9 +56,7 @@ export default class Store{
             this.setAuth(true)
             this.setUser(response.data.user)
         } catch(e){
-            console.log(e)
             this.setErrors([e.response?.data?.message])
-            console.log(e.response?.data?.message)
         } finally{
             this.setLoading(false)
         }
@@ -73,7 +69,6 @@ export default class Store{
             this.setAuth(false)
             this.setUser({})
         } catch(e){
-            console.log(e.response?.data?.message)
             this.setErrors([e.response?.data?.message])
         } finally{
             this.setLoading(false)
@@ -87,18 +82,13 @@ export default class Store{
             localStorage.setItem('token', res.data.accessToken);
             this.setAuth(true)
             this.setUser(res.data.user)
-            console.log(res.data)
             this.setErrors([])
-            console.log('1')
         } catch (e) {
-            console.log(e)
             this.setErrors([e.response?.data?.message])
         }
         finally {
             this.setLoading(false)
         }
-        
-        console.log(this.isAuth)
     }
 
     async isAdmin(){
@@ -113,6 +103,45 @@ export default class Store{
         }
     }
 
+    async changePass(oldpass, newpass){
+        try {
+            const response = await new AuthService().changePass(oldpass, newpass);
+            return response?.data?.success
+        } catch (error) {
+            
+        }
+    }
+
+    async changeNumber(phoneNumber){
+        try {
+            const response = await new AuthService().changeNumber(phoneNumber);
+            return response?.data?.success
+        } catch (error) {
+            
+        }
+    }
+
+    async clearAvatar(){
+        try {
+            const response = await new AuthService().clearAvatar();
+            return response?.data?.success
+        } catch (error) {
+            
+        }
+    }
+
+    async changeAvatar(image){
+        try {
+            const response = await new AuthService().changeAvatar(image);
+            return response?.data?.success
+        } catch (e) {
+            this.setErrors([e.response?.data?.message])
+        }
+        finally {
+            this.setLoading(false)
+        }
+    }
+
     async createRequest(offerID, userID, phoneNumber, rentdays){
         try {
             this.setLoading(true)
@@ -120,7 +149,6 @@ export default class Store{
             if(response.data.success == true) this.setErrors([])
             return response.data
         } catch (e) {
-            console.log(e)
             this.setErrors([e.response?.data?.message])
         }
         finally {
@@ -130,13 +158,11 @@ export default class Store{
 
     async requestsSelf(){
         try {
-            // this.setLoading(true)   
             if(!this.isAuth) return this.setErrors(["Вы не авторизованы!"])
             const response = await new RequestService().getSelfs();
             if(response.data.success == true) this.setErrors([])
             return response.data
         } catch (e) {
-            console.log(e)
             this.setErrors([e.response?.data?.message])
         }
         finally {
@@ -149,19 +175,25 @@ export default class Store{
             const response = await new OffersService().getAll();
             return response.data
         } catch (error) {
-            console.log(error)
-            this.checkAuth()
+            this.setErrors([error.response?.data?.message])
         }
     }
 
     async getOffer(id){
         try {
             const response = await new OffersService().getOffer(id);
-            console.log(response)
             return response.data
-        } catch (error) {
-            console.log(error)
-            this.checkAuth()
+        } catch (error) {            
+            this.setErrors([error.response?.data?.message])
+        }
+    }
+
+    async createOffer(data, file){
+        try {
+            const response = await new OffersService().createOffer(data, file);
+            return response.data?.success
+        } catch (error) {            
+            this.setErrors([error.response?.data?.message])
         }
     }
 
@@ -180,17 +212,37 @@ export default class Store{
     async RequestClose(requestID, closedType, closedComment){
         try {
             const response = await new RequestService().close(requestID, closedType, closedComment);
-            console.log(response)
+            return response.data
+        } catch (error) {            
+            this.setErrors([error.response?.data?.message])
+        } finally {
+
+        }
+    }
+
+    async getRatings(){
+        try {
+            const response = await new RatingService().getAll();
+            return response?.data
         } catch (error) {
-            console.log(error)
-            this.checkAuth()
+            this.setErrors([error.response?.data?.message])
+        } finally {
+
+        }
+    }
+
+    async createRating(message){
+        try {
+            const response = await new RatingService().create(message);
+            return response?.data
+        } catch (error) {
+            this.setErrors([error.response?.data?.message])
         } finally {
 
         }
     }
 
     setErrors(errors){
-        console.log(errors)
         this.localErros = errors;
     }
 }

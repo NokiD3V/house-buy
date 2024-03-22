@@ -11,7 +11,7 @@ import lin from './assets/lin.svg'
  */
 
 const Footer = () => {
-    return (
+    return ( 
         <footer>
             <div className={style.wrapper}>
                 <div className={style.links}>

@@ -8,11 +8,10 @@ module.exports = async (req, res, next) => {
     if(!userData) return next(ApiError.UnauthorizedError())
     
     const isAdmin = await userService.isAdmin(userData.email);
-    console.log(isAdmin)
     if(!isAdmin) return next(ApiError.BadRequest("Вы не являетесь администратором для исполнения этого запроса!"))
 
     next()
   } catch (error) {
-    console.log(error)
+    next(error)
   }
 }

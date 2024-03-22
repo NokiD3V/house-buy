@@ -3,6 +3,7 @@ module.exports = class UserDto {
   id
   email
   admin
+  cancreate
   username
   phoneNumber
   avatarURL
@@ -13,5 +14,6 @@ module.exports = class UserDto {
     this.username = module.username
     this.phoneNumber = module.phoneNumber
     this.avatarURL = module.avatarURL
+    this.cancreate = module.cancreate
   }
 }

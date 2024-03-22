@@ -27,10 +27,6 @@ const ProfilePage = () => {
       
     }, [])
 
-    useEffect(() => {
-      console.log("ABUGA", requests)
-    }, [requests])
-
     
 
     return (
@@ -38,13 +34,6 @@ const ProfilePage = () => {
         <Header/>
         <div className={style.wrapper}>
           <div className={style.content}>
-            {/* <button onClick={() => {
-              store.logout()
-            }}>Logout</button>
-            <button onClick={async () => {
-              let requests = await store.requestsSelf() 
-              console.log("TEST444", requests[0])
-            }}>Test</button> */}
             <div className={style.profile}>
               <div className={style.title}>Приветствую, {store.user.username.split(" ")[1]}!</div>
               <img src={store.user.avatarURL ? store.user.avatarURL : defaultAvatar} alt="" className={style.avatar} />
@@ -64,10 +53,10 @@ const ProfilePage = () => {
 
                   return <div className={style.request__item__wrapper}>
                    <a className={style.request__item} href={`/offers/${n.offer.id}`}>
-                    <img src={n.offer.imgURL ? n.offer.imgURL : banner}/>
+                    <img src={n.offer.imgURL ? n.offer.imgURL : banner} className={style.banner}/>
                     <div className={style.info}>
                       <div className={style.adress}>
-                        <span>{n.offer.adress}</span>
+                        <span>{n.offer.adress} {n.request?.rentTime ? `(Аренда на ${n.request.rentTime} д.)` : null}</span>
                         <div className={style.type}>{
                           n.request.closed ? 
                             <div className={n.request.closedType == 0 ? style.denied : style.success}>{n.request.closedType == 0 ? "Отказано" : "Одобрено"}</div>
@@ -92,11 +81,11 @@ const ProfilePage = () => {
                             </div>
                           </div>
                         : null}
-                        
+                         
                       </div>
                     </div>
                   </a>
-                  .{n.request.closed && n.request?.closedComment?.length > 0 ? <div className={style.comment}><span>Комментарий:</span> {n.request.closedComment}</div> : null}
+                  {n.request.closed && n.request?.closedComment?.length > 0 ? <div className={style.comment}><span>Комментарий:</span> {n.request.closedComment}</div> : null}
                   </div>
                 })}
               </div>

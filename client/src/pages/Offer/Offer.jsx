@@ -30,7 +30,6 @@ const Offer = () => {
     const fetchData = async () => {
       const data = await store.getOffer(params.id);
       setOffer(data.offer)
-      console.log(data.offer)
       setOfferUser(data.offerUser)
     }
     fetchData();
@@ -43,7 +42,7 @@ const Offer = () => {
   const changeRentDays = (e) => {
     if(e.target.value >= 0 && e.target.value <= 365) setRentDays(parseInt(e.target.value))
   }
-
+ 
   const sendRequest = async () => {
     if(rentDays < 1 && typeModel == "rent") return store.setErrors(["Введите количество дней для аренды!"])
 

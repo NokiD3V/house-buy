@@ -17,24 +17,20 @@ class OffersService {
         return new OfferDto(n.dataValues)
       })
 
-      console.log(filteredOffers)
 
       return filteredOffers
     } catch (error) {
-      console.log(error)
+      throw error
     }
   }
 
   async getOffer(id){
     try {
-      console.log("ID?", id)
       let offer = await Offers.findOne({where: {id}})
-      console.log(offer)
 
       if (!offer?.dataValues) {
         throw ApiError.BadRequest(`Не найдено.`)
       }
-      console.log(offer)
 
       const offerUser = await db.users.findOne({where:{id:offer.user}})
       if(!offerUser?.dataValues){
@@ -46,11 +42,18 @@ class OffersService {
         offerUser: new OfferUserDto(offerUser.dataValues)
       }
     } catch (error) {
-      console.log(error)
       throw error
     }
   }
+  async create(data){
+    if(!data) throw ApiError.BadRequest("Ошибка данных. Повторите попытку позже", ["Ошибка данных. Повторите попытку позже"])
+    const {location, phone, price, type, long_desc, short_desc, user, imgURL} = data;
 
+    let offer = await Offers.create({ user, type, description: long_desc, shortDescription: short_desc, adress: location, phoneNumber: phone, price, imgURL })
+    offer = user.dataValues 
+
+    return {success: true}
+  }
   
 }
 

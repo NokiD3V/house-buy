@@ -8,21 +8,22 @@ const RequireAuth = ({ children }) => {
     const {store} = useContext(Context)
     const navigate = useNavigate();
 
+    store.headerAuth = false;
+
     useEffect(() => {
         if(localStorage.getItem('token')){
             store.checkAuth()
         }
+        store.headerAuth = false;
     }, [])
 
     if(store.isLoading){
-        console.log("Loading",store.isLoading)
-        return <Loader/>
+        return <><Loader/></>
     }
 
     if(!store.isAuth){
         if(!store.user) return;
-        navigate("/login", {replace: true})
-        return
+        return navigate("/login", {replace: true})
     }
 
     return children

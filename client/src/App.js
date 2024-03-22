@@ -9,6 +9,9 @@ import Catalog from './pages/Catalog/Catalog';
 import Contact from './pages/Contact/Contact';
 import Offer from './pages/Offer/Offer';
 import Admin from './pages/Admin/Admin';
+import Create from './pages/Create/Create';
+import Settings from './pages/Settings/Settings';
+import Rating from './pages/Rating/Rating';
 
 
 function App() {
@@ -20,13 +23,17 @@ function App() {
         <Route path='/' Component={StartPage}/>
         <Route path='/login' Component={LoginPage}  />
         <Route path='/profile' Component={() => <RequireAuth><ProfilePage/></RequireAuth>}/>
+        <Route path='/settings' Component={() => <RequireAuth><Settings/></RequireAuth>}/>
         <Route path='/register' Component={RegisterPage} />
         <Route path='/catalog' Component={Catalog} />
         <Route path='/contact' Component={Contact} />
+        <Route path='/rating' Component={Rating} />
 
         <Route path='/offers/:id' Component={Offer} />
 
         <Route path='/admin' Component={() => <RequireAuth><Admin/></RequireAuth>} />
+        <Route path='/create' Component={() => <RequireAuth><Create/></RequireAuth>} />
+
       </Routes>
     </BrowserRouter>
   );

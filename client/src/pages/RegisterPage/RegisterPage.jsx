@@ -20,24 +20,8 @@ const RegisterPage = () => {
         formState: {errors}
     } = useForm()
 
-    useEffect(() => {
-        if(localStorage.getItem('token')){
-            store.checkAuth()
-        }
-    }, [])
-
-    useEffect(() => {
-        console.log(errors)
-    },[errors])
-
-    if(store.isLoading){
-        return <Loader/>
-    }
-
     if(store.isAuth){
-        console.log(store.isAuth)
-        window.location.href = "/login"
-        return
+        return window.location.href = "/login"
     }
     
     return (
@@ -46,7 +30,6 @@ const RegisterPage = () => {
             <div className={style.wrapper}>
                 <div className={style.content}>
                     <form className={style.form} onSubmit={handleSubmit((data) => {
-                            console.log(data)
                             if(data.password != data.passwordsecond) return store.setErrors(["Пароли не совпадают!"])
                             const sendData = {
                                 email: data.email,

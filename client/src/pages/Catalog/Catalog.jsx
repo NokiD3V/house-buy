@@ -9,6 +9,7 @@ import style from './style/catalog.module.scss'
 import deafultpic from './assets/deafultpic.png'
 import microdefaultpic from './assets/microdefaultpic.png'
 import mappic from './assets/map.png'
+import Footer from '../../utilities/Footer/Footer';
 
 const Catalog = () => {
     const {store} = useContext(Context)
@@ -17,11 +18,13 @@ const Catalog = () => {
 
     const [searchParams, setSearchParams] = useSearchParams();
 
+    const [hidden, setHidden] = useState(false)
+
     const navigate = useNavigate()
 
     const searchAsObject = Object.fromEntries(
       new URLSearchParams(searchParams)
-    );
+    ); 
 
     const {
       register,
@@ -134,11 +137,7 @@ const Catalog = () => {
             </div>
           </div>
         </div>
-        {/* <button onClick={() => console.log(articles)}>Вывести в консоль чо там</button>
-        {articles.map(n => {
-          let link = `/offers/${n.id}`
-          return <div><a href={link}>{n.title}</a></div>
-        })} */}
+        <Footer/>
       </div>
     )
 }

@@ -44,9 +44,6 @@ const StartPage = () => {
         return price.replace(/\B(?=(\d{3})+(?!\d))/g, ".");
     }
 
-    if(store.isLoading){
-        return <Loader/>
-    }
 
     return (
         <div>
@@ -66,10 +63,6 @@ const StartPage = () => {
                             navigate(link)
                         })}>
                             <div className={style.types}>
-                                <div className={style.name}>
-                                    <div className={style.name__title}>Название объявления</div>
-                                    <div className={style.name__input}><input type="text" placeholder='Введите название...' {...register('title')}/></div>
-                                </div>
                                 <div className={style.price}>
                                     <div className={style.price__title}>Цена</div>
                                     {errors.max || errors.min ? <div className={style.price__error}>Введите корректные числа!</div> : null}
@@ -86,14 +79,15 @@ const StartPage = () => {
                                         <div className={style.type__input}><input id='other' type="radio" value={"other"} name='type' {...register('type')}/><label htmlFor='other'>Другое</label></div>
                                     </div>
                                 </div>
-                                <div className={style.location}>
-                                    <div className={style.location__name}>Местоположение</div>
-                                    <div className={style.location__input}><input type="text" placeholder='Введите адрес...' {...register('location')}/></div>
-                                </div>
+
+                            </div>
+                            <div className={style.location}>
+                                <div className={style.location__name}>Местоположение</div>
+                                <div className={style.location__input}><input type="text" placeholder='Введите адрес...' {...register('location')}/></div>
                             </div>
                             <input type="submit" className={style.search__btn} value="Искать" />
                         </form>
-                    </div>
+                    </div> 
                     <div className={style.map__section}>
                         <div className={style.map__title}>Найди квартиру на карте</div>
                         <a href='#'><img src={map_img} className={style.map__img} /></a>

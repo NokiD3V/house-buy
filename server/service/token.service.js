@@ -29,17 +29,7 @@ class TokenService {
   
       return token
     } catch (error) {
-      console.log(error)
-      console.log(error)
-
-      console.log(error)
-
-      console.log(error)
-      console.log(error)
-      console.log(error)
-      console.log(error)
-      console.log(error)
-
+      throw error
     }
 
   }
@@ -54,7 +44,6 @@ class TokenService {
   async validateAccessToken (token) {
     try {
       const userData = await jwt.verify(token, process.env.JWT_ACCESS_SECRET)
-      console.log(userData)
       return userData
     } catch (e) {
       return null

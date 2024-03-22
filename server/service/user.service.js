@@ -1,6 +1,5 @@
 const db = require('../models/index')
 const Users = db.users
-const Tasks = db.tasks
 
 const bcrypt = require('bcrypt')
 const UserDto = require('../dtos/user.dto')
@@ -65,8 +64,7 @@ class UserService {
 
     const userData = tokenService.validateRefreshToken(refreshToken)
     const tokenFromDB = await tokenService.findToken(refreshToken)
-    console.log(userData)
-    console.log(tokenFromDB)
+
     if (!userData || !tokenFromDB) {
       throw ApiError.UnauthorizedError()
     }
@@ -97,6 +95,71 @@ class UserService {
     user = user.dataValues
 
     return user.admin
+  }
+
+  async changepass(id, oldpass, newpass){
+    let user = await Users.findOne({
+      where: { id }
+    })
+
+
+    if (!user) {
+      throw ApiError.BadRequest('Системная ошибка. Попробуйте заново', ["Системная ошибка. Попробуйте заново"])
+    }
+    user = user.dataValues
+
+    const isPassEquals = await bcrypt.compare(oldpass, user.password)
+    if (!isPassEquals) {
+      throw ApiError.BadRequest("Пароль не совпадает с текущим", ["Пароль не совпадает с текущим"])
+    }
+
+    const hashPassword = await bcrypt.hash(newpass, 3)
+    await Users.update({ password: hashPassword }, {where: {id}})
+
+    return {success: true}
+  }
+
+  async changenumber(id, phoneNumber){
+    let user = await Users.findOne({
+      where: { id }
+    })
+
+
+    if (!user) {
+      throw ApiError.BadRequest('Системная ошибка. Попробуйте заново', ["Системная ошибка. Попробуйте заново"])
+    }
+
+    await Users.update({ phoneNumber }, {where: {id}})
+
+    return {success: true}
+  }
+
+  async clearAvatar(id){
+    let user = await Users.findOne({
+      where: { id }
+    })
+
+    if (!user) {
+      throw ApiError.BadRequest('Системная ошибка. Попробуйте заново', ["Системная ошибка. Попробуйте заново"])
+    }
+
+    await Users.update({ avatarURL: null }, {where: {id}})
+
+    return {success: true}
+  }
+
+  async changeAvatar(id, avatarURL){
+    let user = await Users.findOne({
+      where: { id }
+    })
+
+    if (!user) {
+      throw ApiError.BadRequest('Системная ошибка. Попробуйте заново', ["Системная ошибка. Попробуйте заново"])
+    }
+
+    await Users.update({ avatarURL }, {where: {id}})
+
+    return {success: true}
   }
 }
 
