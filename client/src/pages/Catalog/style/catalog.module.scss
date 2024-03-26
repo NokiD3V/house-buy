@@ -179,7 +179,9 @@
                     margin-bottom: 20px;
                     img{
                         // width: 270px;
-                        width: auto;
+                        max-width: 270px;
+                        min-height: 160px;
+                        width: 100%;
                         height: 160px;
                         border-radius: 12px;
                         object-fit:cover;

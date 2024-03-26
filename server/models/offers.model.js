@@ -45,6 +45,14 @@ module.exports = (sequelize, Sequelize) => {
       type: Sequelize.BOOLEAN,
       allowNull: false,
       defaultValue: false
+    },
+    mapCordX:{
+      type: Sequelize.STRING,
+      allowNull: false,
+    },
+    mapCordY:{
+      type: Sequelize.STRING,
+      allowNull: false,
     }
 
   })

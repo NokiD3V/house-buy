@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext, useEffect, useRef, useState } from 'react';
 import style from './style/startpage.module.scss'
 import { observer } from 'mobx-react-lite';
 import { Context } from '../..';
@@ -13,6 +13,8 @@ import recommend_pic from './assets/pic.png'
 import good from './assets/good.svg'
 import Footer from '../../utilities/Footer/Footer';
 import { useNavigate } from 'react-router-dom';
+
+import { YMaps, Map, ZoomControl, Placemark, Clusterer } from '@pbe/react-yandex-maps';
 
 /**
  * @description Default home page for info about project, Figma-file in README.md
@@ -90,7 +92,29 @@ const StartPage = () => {
                     </div> 
                     <div className={style.map__section}>
                         <div className={style.map__title}>Найди квартиру на карте</div>
-                        <a href='#'><img src={map_img} className={style.map__img} /></a>
+                        <YMaps>
+                            <Map 
+                            defaultState={{ center: [43.1202304400753, 131.88398824315811], 
+                            zoom: 12, 
+                            controls: ["zoomControl", "fullscreenControl"], }} 
+                            modules={["control.ZoomControl", "control.FullscreenControl", "Placemark"]} 
+
+                            width={"70%"} height={"600px"}>
+                                <ZoomControl options={{ float: "right" }} />
+                                <Clusterer>
+                                    {articles.map(n => {
+                                        return <Placemark defaultGeometry={[n.mapCordX, n.mapCordY]} id="1" onClick={(e => {
+                                            const coords = e.get("target").geometry._coordinates
+                                            let filteredArticle = articles.filter(n => {
+                                                return n.mapCordX == coords[0]
+                                            })
+
+                                            window.location.href = "/offers/" + filteredArticle[0].id
+                                        })}/>
+                                    })}
+                                </Clusterer>
+                            </Map>
+                        </YMaps>
                     </div>
                     <div className={style.recommend__section}>
                         <div className={style.recommend__title}>Вам рекомендованно</div>

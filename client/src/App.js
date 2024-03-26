@@ -12,6 +12,7 @@ import Admin from './pages/Admin/Admin';
 import Create from './pages/Create/Create';
 import Settings from './pages/Settings/Settings';
 import Rating from './pages/Rating/Rating';
+import MapC from './pages/Map/Map';
 
 
 function App() {
@@ -34,6 +35,7 @@ function App() {
         <Route path='/admin' Component={() => <RequireAuth><Admin/></RequireAuth>} />
         <Route path='/create' Component={() => <RequireAuth><Create/></RequireAuth>} />
 
+        <Route path='/map' Component={() => <RequireAuth><MapC/></RequireAuth>} />
       </Routes>
     </BrowserRouter>
   );

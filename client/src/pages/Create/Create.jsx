@@ -7,9 +7,7 @@ import style from './style/create.module.scss'
 import { useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 
-import bagicon from './assets/bag.svg'
-import profileicon from './assets/profile.svg'
-import bannericon from './assets/defaultpic.png'
+import { YMaps, Map, ZoomControl, Placemark, Clusterer } from '@pbe/react-yandex-maps';
 
 const Create = () => {
   const {store} = useContext(Context)
@@ -31,6 +29,37 @@ const Create = () => {
   const [selectedImage, setSelectedImage] = useState(null);
   const [imageURL, setImageURL] = useState(null)
   
+  const ymaps = useRef(null);
+  const placemarkRef = useRef(null);
+  const mapRef = useRef(null);
+  const [address, setAddress] = useState([]);
+
+  const createPlacemark = (coords) => {
+    return new ymaps.current.Placemark(
+      coords,
+      {
+        iconCaption: "Выбранная точка"
+      },
+      {
+        preset: "islands#violetDotIconWithCaption",
+        draggable: false
+      }
+    );
+  };
+
+
+  const onMapClick = (e) => {
+    const coords = e.get("coords");
+    console.log(coords)
+
+    if (placemarkRef.current) {
+      placemarkRef.current.geometry.setCoordinates(coords);
+    } else {
+      placemarkRef.current = createPlacemark(coords);
+      mapRef.current.geoObjects.add(placemarkRef.current);
+    }
+    setAddress(coords)
+  };
   
   return (
     <>
@@ -40,9 +69,10 @@ const Create = () => {
           <div className={style.head__title}>Создать объявление</div>            
           <form onSubmit={handleSubmit(async (data) => {
             if(selectedImage == null || imageURL == null) return store.setErrors(["Вы не выбрали изображене баннера"])
+            if(address.length < 1) return store.setErrors(["Выберите метку на карте"])
            
-            const success = await store.createOffer(data, selectedImage);
-            if(success) navigate('/catalog')
+            const success = await store.createOffer(data, selectedImage, address);
+            if(success) return window.location.href = "/catalog"
           })}> 
             <div className={style.slacer}>
               <div className={style.slice__data}>
@@ -75,6 +105,27 @@ const Create = () => {
                         <input type="text" placeholder='+7912345678' min={0} {...register('phone', { pattern: /\d+/, required: true, minLength: 10, maxLength:12})}/>
                     </div>
                   </div>
+                </div>
+                <div className={style.map}>
+                  <YMaps>
+                    <Map 
+                    defaultState={{ center: [43.1202304400753, 131.88398824315811], 
+                    zoom: 12, 
+                    controls: ["zoomControl", "fullscreenControl"], }} 
+                    modules={["control.ZoomControl", "control.FullscreenControl", "geocode", "Placemark"]} 
+                    instanceRef={mapRef}
+                    onLoad={(ympasInstance) => (ymaps.current = ympasInstance)}
+                    onClick={onMapClick}
+
+                    width={"100%"} height={"400px"}>
+                        <ZoomControl options={{ float: "right" }} />
+                        {/* {address && (
+                            <div>
+                                <p>{address}</p>
+                            </div>
+                        )} */}
+                    </Map>
+                </YMaps>
                 </div>
                 <div className={style.upload}>
                   {/* <img src={imageURL} alt="" /> */}

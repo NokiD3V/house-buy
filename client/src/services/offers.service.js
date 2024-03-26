@@ -9,9 +9,9 @@ export default class OffersService{
         return $api.get('/offers/get/' + id)
     }
 
-    async createOffer(data, file){
+    async createOffer(data, file, address){
         const {location, phone, price, type, long_desc, short_desc } = data;
-        let JSON_DATA = {location, phone, price, type, long_desc, short_desc}
+        let JSON_DATA = {location, phone, price, type, long_desc, short_desc, address}
         
         let formData = new FormData()
         formData.append("image", file)

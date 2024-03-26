@@ -188,9 +188,9 @@ export default class Store{
         }
     }
 
-    async createOffer(data, file){
+    async createOffer(data, file, address){
         try {
-            const response = await new OffersService().createOffer(data, file);
+            const response = await new OffersService().createOffer(data, file, address);
             return response.data?.success
         } catch (error) {            
             this.setErrors([error.response?.data?.message])

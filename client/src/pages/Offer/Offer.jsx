@@ -13,6 +13,9 @@ import priceicon from './assets/price.svg'
 
 import RequireAuth from '../../utilities/RequireAuth/RequireAuth';
 
+import { YMaps, Map, ZoomControl, Placemark } from '@pbe/react-yandex-maps';
+
+
 const Offer = () => {
   const params = useParams()
   const {store} = useContext(Context)
@@ -94,7 +97,23 @@ const Offer = () => {
               <div className={style.description}>{offer.description}</div>
             </div>
             <div className={style.right}>
-              <a href='#' className={style.map} ><img src={seemap}/></a>
+              <div className={style.map}>
+
+                <YMaps>
+                  <Map 
+                  defaultState={{ center: [offer.mapCordX, offer.mapCordY], 
+                    zoom: 18, 
+                    controls: ["zoomControl", "fullscreenControl"] 
+                  }} 
+                  modules={["control.ZoomControl", "control.FullscreenControl", "Placemark"]} 
+
+                  width={"100%"} height={"240px"}>
+                      <ZoomControl options={{ float: "right" }} />
+                      <Placemark  defaultGeometry={[offer.mapCordX, offer.mapCordY]} />
+                  </Map>
+                </YMaps>
+
+              </div>
               <div className={style.contact__title}>Контакт</div>
               <div className={style.contact}>
                 <img src={profileicon}/>

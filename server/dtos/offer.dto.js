@@ -8,6 +8,8 @@ module.exports = class OfferDto {
   imgURL
   price
   phoneNumber
+  mapCordX
+  mapCordY
   constructor (module) {
     this.id = module.id
     this.user = module.user
@@ -19,5 +21,7 @@ module.exports = class OfferDto {
     this.phoneNumber = module.phoneNumber
     this.adress = module.adress
     this.shortDescription = module.shortDescription
+    this.mapCordX = module.mapCordX
+    this.mapCordY = module.mapCordY
   }
 }

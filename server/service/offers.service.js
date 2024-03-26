@@ -47,9 +47,9 @@ class OffersService {
   }
   async create(data){
     if(!data) throw ApiError.BadRequest("Ошибка данных. Повторите попытку позже", ["Ошибка данных. Повторите попытку позже"])
-    const {location, phone, price, type, long_desc, short_desc, user, imgURL} = data;
+    const {location, phone, price, type, long_desc, short_desc, user, imgURL, address} = data;
 
-    let offer = await Offers.create({ user, type, description: long_desc, shortDescription: short_desc, adress: location, phoneNumber: phone, price, imgURL })
+    let offer = await Offers.create({ user, type, description: long_desc, shortDescription: short_desc, adress: location, phoneNumber: phone, price, imgURL, mapCordX: address[0], mapCordY: address[1] })
     offer = user.dataValues 
 
     return {success: true}

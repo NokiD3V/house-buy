@@ -97,7 +97,7 @@ const Catalog = () => {
                   </div>
                   <input type="submit" value="Фильтровать" className={style.submit}/>
                 </form>
-                <a href="#" className={style.map}><img src={mappic} /></a>
+                <a href="/map" className={style.map}><img src={mappic} /></a>
               </div>
               <div className={style.articles}>
                 {articles.filter(val => {
