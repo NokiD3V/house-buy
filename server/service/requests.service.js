@@ -109,6 +109,16 @@ class RequestsService {
       if(!request) throw ApiError.BadRequest("Не найден данный запрос по уникальному индентификатору! Попробуйте заново.")
 
       Requests.update({ closed: true, closedType, closedBy, closedComment }, {where: {id: requestID}})
+      let requestUser = await db.users.findOne({where: {id: request.user}})
+      if(requestUser && requestUser?.telegramID != null){
+        db.notf.create({
+          offer: request.offer,
+          closedType,
+          closedBy, 
+          closedComment: closedComment || "",
+          telegramID: requestUser.telegramID
+        })
+      }
 
       return {success: true}
     } catch (error) {

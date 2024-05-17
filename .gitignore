@@ -3,3 +3,4 @@
 /client/dist
 /server/.env
 /client/.env
+/tgbot/config.py

@@ -30,6 +30,7 @@ db.offers = require('./offers.model.js')(sequelize, Sequelize)
 db.users = require('./users.model.js')(sequelize, Sequelize)
 db.tokens = require('./tokens.model.js')(sequelize, Sequelize)
 db.ratings = require('./ratings.model.js')(sequelize,Sequelize)
+db.notf = require('./notf.model.js')(sequelize,Sequelize)
 
 
 module.exports = db

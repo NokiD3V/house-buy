@@ -1,6 +1,8 @@
 import axios from 'axios'
 
-export const API_URL = 'http://localhost:81/api'
+
+
+export const API_URL = window.location.origin.replace(":3000", ":81") + "/api"
 
 const $api = axios.create({
     withCredentials: true,

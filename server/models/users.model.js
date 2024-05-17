@@ -41,6 +41,11 @@ module.exports = (sequelize, Sequelize) => {
     avatarURL:{
       type: Sequelize.STRING,
       allowNull: true
+    },
+    telegramID:{
+      type: Sequelize.STRING,
+      defaultValue: null,
+      allowNull: true
     }
   })
 

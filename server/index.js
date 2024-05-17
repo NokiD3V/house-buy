@@ -15,13 +15,16 @@ const cookieParser = require('cookie-parser')
 const fileUpload = require('express-fileupload');
 const cors = require('cors')
 const corsOptions = {
-  origin: 'http://localhost:3000',
-  credentials: true
+  origin: ["localhost:3000", "http://127.0.0.1:3000"],
+  default: "127.0.0.1:3000"
 }
 app.use('/static/', express.static(__dirname + '/public'));
 
 // Интеграция API вместе с парсерами
-app.use(cors(corsOptions))
+app.use(cors({ origin: function (origin, callback) {
+
+  callback(null, origin)
+}, credentials: true }));
 app.use(express.json({ limit: '50mb' }))
 app.use(express.urlencoded({ extended: true, limit: '50mb', parameterLimit: 50000 }))
 app.use(bodyParser.json({ limit: '50mb' }))
@@ -29,7 +32,6 @@ app.use(cookieParser())
 app.use(fileUpload({
   createParentPath: true
 }))
-
 
 
 
