@@ -50,7 +50,7 @@ const Header = () => {
                     }
                 </header>  
             </div>
-            {/* { store.localErros.length > 0 && store.localErros?.[0] != undefined ?       
+            { store.localErros.length > 0 && store.localErros?.[0] != undefined ?       
 
             store.localErros.map(n => {
                 return (
@@ -66,7 +66,7 @@ const Header = () => {
 
 
             : null
-            } */}
+            }
 
         </div>
 
